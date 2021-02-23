@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Deep Planer</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript" src="resources/js/LoginJS.js"></script>
+        <link rel="stylesheet" href="resources/css/basicStyle.css"/>
+
+        <script src="resources/js/daypilot/daypilot-all.min.js" type="text/javascript"></script>
+    </h:head>
+    <h:body>
+        <div id="divLogin" class="formLoginHeader">
+            <img id="logo" class="loginPicture" src="resources/images/Logo_Spider.png" alt="Logo"/>
+            <h:form id="frmLogin" class="formLogin1">
+                <p:inputText id="lgnUser" placeholder="Username" class="loginText"
+                             value="#{authenticationbean.username}" required="true" rendered="#{authenticationbean.showInputUsername}"/>
+                <p:password id="lgnPass" placeholder="Password" class="loginText"
+                            value="#{authenticationbean.password}" required="true" rendered="#{authenticationbean.showInputPass}"/>
+                <p:outputLabel id="lgnActiveUser" class="loginUserInfo" value="You are logged in as: #{authenticationbean.activeUser.username}" 
+                               rendered="#{authenticationbean.showLblInfo}"/>
+                <p:commandButton id="btnLogin" value=" Login "
+                                 class="loginButton"
+                                 rendered="#{authenticationbean.showBtnLogin}"
+                                 action="#{authenticationbean.authenticate()}" 
+                                 update="frmLogin frmRegForg"
+                                 oncomplete="if (!args.validationFailed) loginAction();"/>
+                <!--oncomplete="if (!args.validationFailed) loginAction();"/>-->
+                <p:commandButton id="btnLogout" value=" Logout "
+                                 class="loginButton"
+                                 rendered="#{authenticationbean.showBtnLogout}"
+                                 action="#{authenticationbean.logout()}"
+                                 update="frmLogin frmRegForg"/>
+                <!--oncomplete="loginOutAction();"/> -->              
+            </h:form>
+            <h:form id="frmRegForg" class="formLogin2">
+                <p:commandLink id="lnkFrgPass" class="loginAdditional" value=" Forgot password |" rendered="#{authenticationbean.showBtnLogin}"/>
+                <p:commandLink class=" loginAdditional" value="| Registration " rendered="#{authenticationbean.showBtnLogin}" action="registration.xhtml"/>
+            </h:form>
+        </div>
+        <div id="divForgot" class="divForgotPass">
+            <h:form id="frmForgot" class="divForgotPass-content animate">
+                <div class="imgcontainer">
+                    <img src="resources/images/Logo_Spider.png" alt="Logo" class="avatar"/>
+                </div>
+                <div class="container">
+                    <table align="center" id="tableFrgpass">
+                        <tr>
+                            <th><p:outputLabel>Username: </p:outputLabel></th>
+                            <th><p:inputText id="username" class="loginText" value="#{forgotPassBean.username}"/></th>
+                        </tr>
+                        <tr>
+                            <th><p:outputLabel style="margin-right:37px">Email: </p:outputLabel></th>
+                            <th><p:inputText  id="email" class="loginText" value="#{forgotPassBean.email}"/></th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th><h:commandButton id="btnForgot" value=" Send password to email! "
+                                                 class="btnSendEmail"
+                                                 action="#{forgotPassBean.sendPassword()}"/></th>
+                        </tr>
+                    </table>
+                    <button type="button" id="btnCancel" class="cancelbtn">Cancel</button>
+                </div>
+
+            </h:form> 
+        </div>
+
+
+        <h2 align="center" class="regFormheader">My Schedule</h2>
+        <h:form id="frmSchedule">
+            <div id="scheduleDivv" class="scheduleDiv" onload="#{scheduleBean.loadScheduleNotes()}">
+                <div id="nav" class="navigator"></div>
+                <div id="dp" class="schedule"></div> 
+            </div>
+        </h:form>
+        <div id="details" class="schDetails">
+            <h:form id="frmDetails" class="schDetails-content">
+                <div class="details-container">
+                    <div class="colorDiv"><input id="color" type="color" class="details-color" value="#ffffff"/></div><br/>
+                    <div class="details-name"><p:outputLabel id="name" value="Name"/></div>
+                    <div class="details-date">
+                        <label class="details-date-label">FROM: </label>
+                        <p:outputLabel class="details-date-output" id="dateFrom" value="Date From"/>
+                        <label class="details-date-label">TO:  </label>
+                        <p:outputLabel class="details-date-output" id="dateTo" value="Date To"/></div>
+                        <div class="details-description"><p:outputLabel id="description" value="Description"/></div>
+
+                </div>   
+            </h:form>   
+        </div>
+
+        <script type="text/javascript">
+            var dp = new DayPilot.Calendar("dp");
+            dp.startDate = "2021-02-16";
+            dp.viewType = "Week";
+            dp.onTimeRangeSelected = function (args) {
+                var name = prompt("New event name:", "Event");
+                if (!name)
+                    return;
+                var e = new DayPilot.Event({
+                    start: args.start,
+                    end: args.end,
+                    id: DayPilot.guid(),
+                    text: name
+                });
+                dp.events.add(e);
+                dp.clearSelection();
+            };
+            var jsonSchedule = [];
+            dp.onEventClick = function (args) {
+                document.getElementById('details').style.display = 'block';
+                document.getElementById('frmDetails:name').innerHTML = "heyy";
+                var arrayJs = [];
+                for (const key in jsonSchedule) {
+                    arrayJs = jsonSchedule[key];
+                }
+                for (var i = 0; i &lt; arrayJs.length; i++) {
+                    var obj = arrayJs[i];
+                    if (obj.id == args.e.id()) {
+                        document.getElementById('color').value = obj.color;
+                        document.getElementById('frmDetails:name').innerHTML = obj.notename;
+                        document.getElementById('frmDetails:description').innerHTML = obj.description;
+                        document.getElementById('frmDetails:dateFrom').innerHTML = obj.datefrom;
+                        document.getElementById('frmDetails:dateTo').innerHTML = obj.dateto;
+                        break;
+                    }
+                }
+            };
+            dp.init();
+            function addEvent(id, lstart, lend, name, description, color) {
+                var dstart = new Date(lstart);
+                var dend = new Date(lend);
+                var start = dstart.getFullYear() + "-" + formatNum(dstart.getMonth() + 1) + "-" + formatNum(dstart.getDate()) + "T"
+                        + formatNum(dstart.getHours()) + ":" + formatNum(dstart.getMinutes()) + ":" + formatNum(dstart.getSeconds());
+                var end = dend.getFullYear() + "-" + formatNum(dend.getMonth() + 1) + "-" + formatNum(dend.getDate()) + "T"
+                        + formatNum(dend.getHours()) + ":" + formatNum(dend.getMinutes()) + ":" + formatNum(dend.getSeconds());
+                var e = new DayPilot.Event({
+                    start: new DayPilot.Date(start),
+                    end: new DayPilot.Date(end),
+                    id: id,
+                    html: formatNote(name, description),
+                    backColor: color,
+                    barHidden: "true"
+                });
+                dp.events.add(e);
+            }
+            function formatNum(number) {
+                if (number.toString().length === 1) {
+                    return "0".concat(number);
+                }
+                return number.toString();
+            }
+
+            function formatNote(name, description) {
+                var html = '<div class="noteHeader"><label>' + name + '</label></div>\n\
+                          <div class="noteBody"><label>' + description + '</label></div>';
+                return html;
+            }
+
+            function appendSchedule(json) {
+                jsonSchedule = json;
+            }
+            var e = new DayPilot.Event({
+                start: new DayPilot.Date("2021-02-19T12:00:00"),
+                end: new DayPilot.Date("2021-02-19T12:00:00").addHours(3).addMinutes(15),
+                id: "30",
+                html: "<b> Main event</b><br></br><p>heyy</p>",
+                text: "Spanking arses",
+                backColor: "green",
+                borderColor: "#6AA84F",
+                fontColor: "white",
+                barHidden: "false"
+            });
+            dp.events.add(e);
+            var nav = new DayPilot.Navigator("nav");
+            nav.showMonths = 3;
+            nav.skipMonths = 3;
+            nav.selectMode = "week";
+            nav.onTimeRangeSelected = function (args) {
+                dp.startDate = args.day;
+                dp.update();
+                loadEvents();
+            };
+            nav.init();
+        </script>
+
+    </h:body>
+</html>

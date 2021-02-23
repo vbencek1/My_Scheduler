@@ -1,0 +1,357 @@
+.formLoginHeader{
+    width: 100%;
+    height: 60px;
+    background: #333333;
+    margin: auto;
+    display: flex; 
+    justify-content: flex-end;
+}
+
+.formLogin1{
+    margin-left: auto; 
+    margin-right: 0;
+}
+.formLogin2 {
+    margin-right: 0;
+    color: white;
+    padding: 13px;
+}
+.loginText {
+    background-color: #eee;
+    border: none;
+    border-radius:0px;
+    box-shadow: inset 0px 0px 0px 0px red;
+    padding: 5px 15px;
+    margin: 10px 0 2px 4px;
+    width: 180px;
+    height: 20px;
+}
+
+.loginButton {
+    border-radius:0px;
+    border: none;
+    background: none gray;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 5px 35px 1px;
+    margin: 10px 30px 2px 4px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    box-shadow: inset 0px 0px 0px 0px red;
+    height: 30px;
+}
+.loginButton:hover{
+    background-color: #757474;
+    border: gray 1px;
+}
+.loginButton:focus{
+    background-color: lightgray;
+    border: gray 1px;
+}
+
+.loginAdditional{
+    color:white;
+    text-decoration: none;
+}
+.loginAdditional:hover{
+    color:#f69ad2;
+}
+
+.loginUserInfo{
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: bold;
+    color:white;
+}
+
+.loginPicture{
+    margin: 1px 0px 0px 10px;
+    height: 60px;
+}
+
+.divForgotPass {
+    display: none;
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+    padding-top: 60px;
+}
+
+.divForgotPass-content {
+    background-color: #ffffff;
+    margin: 5% auto 15% auto;
+    border: 1px solid #888;
+    width: 50%;
+}
+
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+    position: relative;
+}
+
+img.avatar {
+    width: 20%;
+    border-radius: 40%;
+}
+
+.container {
+    padding: 16px;
+}
+
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+.cancelbtn {
+    width: auto;
+    padding: 8px 14px;
+    background-color: #f44336;
+}
+
+.cancelbtn:hover {
+    background-color: #cc0000;
+}
+
+.animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+    from {-webkit-transform: scale(0)} 
+    to {-webkit-transform: scale(1)}
+}
+
+@keyframes animatezoom {
+    from {transform: scale(0)} 
+    to {transform: scale(1)}
+}
+
+@media screen and (max-width: 300px) {
+    span.psw {
+        display: block;
+        float: none;
+    }
+    .cancelbtn {
+        width: 100%;
+    }
+}
+
+.btnSendEmail{
+    border-radius:0px;
+    border: none;
+    background: none gray;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 0px 10px 0px 10px;
+    margin: 10px 0px 2px 0px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    box-shadow: inset 0px 0px 0px 0px red;
+    height: 30px;
+    width: 99%;
+    float:right;
+}
+.btnSendEmail:hover{
+    background-color: #003366;
+    border: gray 1px;
+}
+
+.regButtonBack{
+    text-decoration: none;
+    display: inline-block;
+    padding: 1px 16px; 
+    background-color: #f1f1f1;
+    color: black;
+    border-radius: 50%;
+    margin: 10px 10px 10px 10px;
+    font-size: 30px;
+}
+.regButtonBack:hover {
+    background-color: #fc2eb2;
+    color: black;
+}
+
+.regForm{
+    margin: auto;
+    width: 18%;
+    border: 3px solid #333333;
+    padding: 50px 50px 50px 50px;
+    border-radius: 10%;
+}
+
+.regForm > label{
+    color: #fc2eb2;
+}
+
+.regForm > input{
+    color: gray;
+    background-color: #eee;
+    border: solid 1px;
+    border-radius:0px;
+    box-shadow: inset 0px 0px 0px 0px red;
+    padding: 5px 0px 5px 15px;
+    margin: 3px 0 20px 0px;
+    width: 95%;
+    height: 20px;
+}
+.regForm>button{
+    border-radius:0px;
+    border: none;
+    background: none #333333;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 1px 35px 1px;
+    margin: 10px 0px 2px 0px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    box-shadow: inset 0px 0px 0px 0px red;
+    height: 30px; 
+    float:right;
+}
+
+.regForm>button:hover{
+    background-color: #fc2eb2;
+    border: gray 3px;
+}
+
+.regFormheader{
+    font-size: 36px;
+    line-height: 40px;
+    margin: 1em 0 .6em 0;
+    font-weight: normal;
+    color: white;
+    font-family: 'Hammersmith One', sans-serif;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
+    position: relative;
+    color: #131313;
+
+}
+
+.scheduleDiv{
+    width: 100%;
+    background: #333333;
+    margin: auto;
+    display: flex;
+}
+
+.navigator{
+    margin-left: auto; 
+    margin-right: 0;
+}
+.schedule {
+    margin-right: 0;
+    color: white;
+    padding: 13px;
+
+}
+
+.noteHeader{
+    padding-bottom: 2px;
+    padding-left: 2px;
+    margin-bottom: 2px;
+    border-bottom: 1px solid gray;
+    width: 100%;
+    color: white;
+    font: 12px bold Verdana;
+}
+.noteBody{
+    width: 100%;
+    height: 100%;
+    padding-left: 2px;
+    padding-top: 2px;
+    color: white;
+    font-family: Verdana;
+    font-size:10px;
+}
+
+.schDetails{
+    display: none;
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+    padding-top: 60px;
+}
+
+.schDetails-content{
+    background-color: #ffffff;
+    margin: 5% auto 15% auto;
+    border: 1px solid #888;
+    width: 40%;
+    border-radius: 25px;
+}
+.details-container {
+    padding: 16px;
+}
+.details-color{
+    border: 0;
+    padding: 0;
+    width: 200%;
+    height: 200%;
+    cursor: pointer;
+    transform: translate(-25%, -25%)
+}
+.colorDiv{
+    width: 100px;
+    height: 10px;
+    border-radius: 50px;
+    overflow: hidden;
+}
+
+.details-name{
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 16px;
+    letter-spacing: 2px;
+    color: #333333;
+    width: 100%;
+    border-bottom: 1px solid black;
+    margin-bottom: 10px;
+    padding-bottom: 4px;
+}
+
+.details-date{
+    font-family: monospace;
+    font-size: 14px;
+    color: #333333;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.details-date-label{
+    color: #fc2eb2;
+}
+.details-date-output{
+    margin-right: 25px;
+}
+
+.details-description{
+    letter-spacing: 1px;
+    font-family: monospace;
+    font-size: 13px;
+    width: 96%;
+    height: 150px;
+    border: 2px solid gray;
+    border-radius: 25px;
+    background: #b5b5b5;
+    color:white;
+    padding: 8px 12px 8px 12px;
+    
+}

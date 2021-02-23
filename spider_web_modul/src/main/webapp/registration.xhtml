@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Registration</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript" src="resources/js/BasicFunctions.js"></script>
+        <link rel="stylesheet" href="resources/css/basicStyle.css"/>
+    </h:head>
+    <h:body>
+        <div class="formLoginHeader" style="justify-content: flex-start">
+            <a href="index.xhtml" class="regButtonBack">&#8249;</a>
+        </div>
+        <h2 align="center" class="regFormheader">Registration Form</h2>
+        <h:form id="form1">
+            <br/><br/>
+            <div class="regForm" id="table1">
+                <p:outputLabel>Username: </p:outputLabel><br/>
+                <p:inputText id="username" value="#{registrationBean.username}"/><br/>
+
+                <p:outputLabel>Password: </p:outputLabel><br/>
+                <p:password  id="password" value="#{registrationBean.password}"/><br/>
+
+                <p:outputLabel>Email: </p:outputLabel><br/>
+                <p:inputText id="email" value="#{registrationBean.email}"/><br/>
+
+                <p:commandButton id="btnRegister" value=" Register " 
+                                 onclick="showConfForm()"
+                                 action="#{registrationBean.sendRegistrationCode()}"/>
+            </div>
+        </h:form>
+        <br/><br/>
+        <h:form id="codeConfirmation" style="display: none">
+            <table align="center">
+                <tr>
+                    <th><p:outputLabel>Confirmation code: </p:outputLabel></th>
+                    <th><p:inputText value="#{registrationBean.confirmationCode}"/></th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th><p:commandButton id="btnConfirm" value=" Confirm code " 
+                                         action="#{registrationBean.confirmCode()}"
+                                         update="codeMessage"/></th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th><p:outputLabel id="codeMessage" value="#{registrationBean.codeMessage}"/></th>
+                </tr>
+            </table>
+        </h:form>
+    </h:body>
+</html>
