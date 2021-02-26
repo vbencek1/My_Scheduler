@@ -8,6 +8,7 @@ package org.spider.vbencek.spider_ejb_modul.sb;
 import java.util.List;
 import javax.ejb.Local;
 import org.spider.vbencek.spider_ejb_modul.eb.Notes;
+import org.spider.vbencek.spider_ejb_modul.eb.Users;
 
 /**
  *
@@ -29,5 +30,7 @@ public interface NotesFacadeLocal {
     List<Notes> findRange(int[] range);
 
     int count();
+    
+    List<Notes> findNotebyUser(Users user);
     
 }
