@@ -297,6 +297,13 @@ span.psw {
     width: 40%;
     border-radius: 25px;
 }
+.schDetails-new{
+    height: 30px;
+    width: 100px;
+    margin: 0;
+    padding: 0;
+}
+
 .details-container {
     padding: 16px;
 }
@@ -340,6 +347,7 @@ span.psw {
 }
 .details-date-output{
     margin-right: 25px;
+    border: none;
 }
 
 .details-description{
@@ -350,8 +358,14 @@ span.psw {
     height: 150px;
     border: 2px solid gray;
     border-radius: 25px;
-    background: #b5b5b5;
+    background: #cccccc;
     color:white;
     padding: 8px 12px 8px 12px;
     
+}
+
+.details-text{
+    border:none;
+    background: none;
+    width: 100%;
 }

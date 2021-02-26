@@ -27,18 +27,15 @@ and open the template in the editor.
                             value="#{authenticationbean.password}" required="true" rendered="#{authenticationbean.showInputPass}"/>
                 <p:outputLabel id="lgnActiveUser" class="loginUserInfo" value="You are logged in as: #{authenticationbean.activeUser.username}" 
                                rendered="#{authenticationbean.showLblInfo}"/>
-                <p:commandButton id="btnLogin" value=" Login "
+                <h:commandButton id="btnLogin" value=" Login "
                                  class="loginButton"
                                  rendered="#{authenticationbean.showBtnLogin}"
-                                 action="#{authenticationbean.authenticate()}" 
-                                 update="frmLogin frmRegForg"
-                                 oncomplete="if (!args.validationFailed) loginAction();"/>
+                                 action="#{authenticationbean.authenticate()}"/>
                 <!--oncomplete="if (!args.validationFailed) loginAction();"/>-->
-                <p:commandButton id="btnLogout" value=" Logout "
+                <h:commandButton id="btnLogout" value=" Logout "
                                  class="loginButton"
                                  rendered="#{authenticationbean.showBtnLogout}"
-                                 action="#{authenticationbean.logout()}"
-                                 update="frmLogin frmRegForg"/>
+                                 action="#{authenticationbean.logout()}"/>
                 <!--oncomplete="loginOutAction();"/> -->              
             </h:form>
             <h:form id="frmRegForg" class="formLogin2">
@@ -76,24 +73,31 @@ and open the template in the editor.
 
 
         <h2 align="center" class="regFormheader">My Schedule</h2>
-        <h:form id="frmSchedule">
             <div id="scheduleDivv" class="scheduleDiv" onload="#{scheduleBean.loadScheduleNotes()}">
+                
                 <div id="nav" class="navigator"></div>
-                <div id="dp" class="schedule"></div> 
+                <div class="schedule">
+                    <button id="new" class="schDetails-new">New Entry</button>
+                    <div id="dp" ></div> 
+                </div>              
             </div>
-        </h:form>
         <div id="details" class="schDetails">
             <h:form id="frmDetails" class="schDetails-content">
                 <div class="details-container">
-                    <div class="colorDiv"><input id="color" type="color" class="details-color" value="#ffffff"/></div><br/>
-                    <div class="details-name"><p:outputLabel id="name" value="Name"/></div>
+                    <div class="colorDiv"><input id="color" type="color" class="details-color" value="#FFFFFF"/></div><br/>
+                    <div class="details-name"><h:inputText class="details-text" id="name" value="#{scheduleBean.noteName}"/></div>
                     <div class="details-date">
+                        <h:inputText style="display:none;" id="noteId" value="#{scheduleBean.noteID}"/>
+                        <h:inputText style="display:none;" id="colorVal" value="#{scheduleBean.noteColor}"/>
                         <label class="details-date-label">FROM: </label>
-                        <p:outputLabel class="details-date-output" id="dateFrom" value="Date From"/>
+                        <h:inputText class="details-date-output" id="dateFrom" value="note_date_from"/>
+                        <h:inputText style="display:none;" id="dateFromVal" value="#{scheduleBean.noteDateFrom}"/>
                         <label class="details-date-label">TO:  </label>
-                        <p:outputLabel class="details-date-output" id="dateTo" value="Date To"/></div>
-                        <div class="details-description"><p:outputLabel id="description" value="Description"/></div>
-
+                        <h:inputText class="details-date-output" id="dateTo" value="note_date_to"/></div>
+                        <h:inputText style="display:none;" id="dateToVal" value="#{scheduleBean.noteDateTo}"/>
+                        <div class="details-description"><h:inputText class="details-text" id="description" value="#{scheduleBean.noteDescription}"/></div>                       
+                        <h:commandButton id="delete" style="display: none;" value="Delete" action="#{scheduleBean.deleteNode()}"/>
+                        <h:commandButton value="Save" action="#{scheduleBean.createNote()}"/>
                 </div>   
             </h:form>   
         </div>
@@ -118,7 +122,7 @@ and open the template in the editor.
             var jsonSchedule = [];
             dp.onEventClick = function (args) {
                 document.getElementById('details').style.display = 'block';
-                document.getElementById('frmDetails:name').innerHTML = "heyy";
+                document.getElementById('frmDetails:delete').style.display = 'block';
                 var arrayJs = [];
                 for (const key in jsonSchedule) {
                     arrayJs = jsonSchedule[key];
@@ -127,14 +131,25 @@ and open the template in the editor.
                     var obj = arrayJs[i];
                     if (obj.id == args.e.id()) {
                         document.getElementById('color').value = obj.color;
-                        document.getElementById('frmDetails:name').innerHTML = obj.notename;
-                        document.getElementById('frmDetails:description').innerHTML = obj.description;
-                        document.getElementById('frmDetails:dateFrom').innerHTML = obj.datefrom;
-                        document.getElementById('frmDetails:dateTo').innerHTML = obj.dateto;
+                        document.getElementById('frmDetails:name').value = obj.notename;
+                        document.getElementById('frmDetails:description').value = obj.description;
+                        document.getElementById('frmDetails:dateFromVal').value = obj.datefrom;
+                        document.getElementById('frmDetails:dateToVal').value = obj.dateto;
+                        document.getElementById('frmDetails:dateFrom').value = formatDate(obj.datefrom);
+                        document.getElementById('frmDetails:dateTo').value = formatDate(obj.dateto);
+                        document.getElementById('frmDetails:noteId').value = obj.id;
                         break;
                     }
                 }
             };
+            function formatDate(sdate){
+                var ldate = Number(sdate)
+                var date= new Date(ldate);
+                var formatedDate = date.getFullYear() + "-" + formatNum(date.getMonth() + 1) + "-" + formatNum(date.getDate()) + " "
+                        + formatNum(date.getHours()) + ":" + formatNum(date.getMinutes()) + ":" + formatNum(date.getSeconds());
+                return formatedDate;
+            }
+            
             dp.init();
             function addEvent(id, lstart, lend, name, description, color) {
                 var dstart = new Date(lstart);
@@ -169,18 +184,7 @@ and open the template in the editor.
             function appendSchedule(json) {
                 jsonSchedule = json;
             }
-            var e = new DayPilot.Event({
-                start: new DayPilot.Date("2021-02-19T12:00:00"),
-                end: new DayPilot.Date("2021-02-19T12:00:00").addHours(3).addMinutes(15),
-                id: "30",
-                html: "<b> Main event</b><br></br><p>heyy</p>",
-                text: "Spanking arses",
-                backColor: "green",
-                borderColor: "#6AA84F",
-                fontColor: "white",
-                barHidden: "false"
-            });
-            dp.events.add(e);
+            
             var nav = new DayPilot.Navigator("nav");
             nav.showMonths = 3;
             nav.skipMonths = 3;
@@ -191,6 +195,7 @@ and open the template in the editor.
                 loadEvents();
             };
             nav.init();
+            
         </script>
 
     </h:body>
