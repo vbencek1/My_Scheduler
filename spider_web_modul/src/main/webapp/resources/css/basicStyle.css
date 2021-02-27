@@ -296,12 +296,20 @@ span.psw {
     border: 1px solid #888;
     width: 40%;
     border-radius: 25px;
+    padding-bottom: 25px;
 }
 .schDetails-new{
-    height: 30px;
-    width: 100px;
+    height: 25px;
+    width: 120px;
     margin: 0;
     padding: 0;
+    border-radius: 0px;
+    border: 1px solid gray;
+    font-family: monospace;
+}
+
+.schDetails-new:hover{
+    background: #cccccc;
 }
 
 .details-container {
@@ -316,6 +324,7 @@ span.psw {
     transform: translate(-25%, -25%)
 }
 .colorDiv{
+    border: 1px solid black;
     width: 100px;
     height: 10px;
     border-radius: 50px;
@@ -368,4 +377,23 @@ span.psw {
     border:none;
     background: none;
     width: 100%;
+}
+
+.details-button{
+    float: right;
+    margin-top: 10px;
+    margin-left: 10px;
+    border-radius: 10px;
+    border: none;
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 10px;
+    padding: 5px 5px;
+    width: 50px;
+    background-color: #757474;
+    color:white;
+    
+}
+.details-button:hover{
+    background: #888;
 }

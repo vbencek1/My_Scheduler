@@ -95,9 +95,9 @@ and open the template in the editor.
                         <label class="details-date-label">TO:  </label>
                         <h:inputText class="details-date-output" id="dateTo" value="note_date_to"/></div>
                         <h:inputText style="display:none;" id="dateToVal" value="#{scheduleBean.noteDateTo}"/>
-                        <div class="details-description"><h:inputText class="details-text" id="description" value="#{scheduleBean.noteDescription}"/></div>                       
-                        <h:commandButton id="delete" style="display: none;" value="Delete" action="#{scheduleBean.deleteNode()}"/>
-                        <h:commandButton value="Save" action="#{scheduleBean.createNote()}"/>
+                        <div class="details-description"><h:inputText class="details-text" id="description" value="#{scheduleBean.noteDescription}"/></div>  
+                        <h:commandButton class="details-button" value="Save" action="#{scheduleBean.createNote()}"/>                
+                        <h:commandButton class="details-button" id="delete" style="display: none;" value="Delete" action="#{scheduleBean.deleteNode()}"/>
                 </div>   
             </h:form>   
         </div>
